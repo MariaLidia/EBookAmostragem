@@ -1,3 +1,3 @@
 # EBookAmostragem
 
-Este repositório tem o propósito de se criar o e-book de amostragem do curso de Extensão de Estatística do Departamento de Estatística da UFPB (@estatisiticalivre)
+Este repositório tem o propósito de se criar o e-book de amostragem do Curso de Extensão do Departamento de Estatística da UFPB (@estatisiticalivre)
