@@ -1,0 +1,28 @@
+# Introdução
+
+<div style="text-align: justify">  
+
+A experiência adquirida ao longo dos anos de docência permite constatar que há dificuldades inerentes no desempenho do alunado nessas aplicações técnicas, pois nas disciplinas básicas de Estatística o conteúdo é basicamente teórico não havendo tempo hábil para as aplicações.
+
+ Desse modo é preciso criar um curso prático para integrar um conhecimento teórico ao prático, incentivando uma melhoria na aplicação da estatística nas pesquisas, artigos, dissertações e teses da comunidade acadêmica, resultando em um profissional de excelência para o mercado de trabalho. Para isso, é necessário fazer com que esse aluno melhore o seu desempenho na aplicação das técnicas, sendo o apoio didático-pedagógico uma importante ferramenta.
+ 
+ O software R é um ambiente computacional integrado e ao mesmo tempo uma linguagem de programação orientada, desenvolvido para análise de dados, realização de cálculos e modelos estatísticos. Desenvolvida em 1996 por Ross Ihaka e Robert Gentleman, a linguagem R foi baseada na linguagem S, já bastante utilizada na época para análise estatística, com a diferença de ser gratuita. O software está disponível para download em <http://cran.r-project.org> para sistemas operacionais Linux, Windows e MacOS. A grande variedade de técnicas disponíveis se deve ao fato de se tratar de um software livre. O R vem então conquistando um lugar importante no âmbito da análise de dados, sendo atualmente o software estatístico mais utilizado mundialmente, ganhando cada vez mais espaço em todas as áreas do conhecimento.
+ 
+ Apesar do software R ter uma interface gráfica, novos usuários podem ter alguma dificuldade em utilizá-lo. Visto isso, podemos fazer uso de uma interface mais intuitiva integrada ao software R, chamada RStudio. O RStudio e encontrado em duas versões: RStudio Desktop, para aqueles usuários que desejam rodar o programa localmente como um software comum; e RStudio Server, que permite o acesso remoto usando um navegador web e que facilita o desenvolvimento de grandes projetos que exijam o trabalho de muitas pessoas simultaneamente. Assim como o R, o RStudio é gratuito e está disponível para download em <https://www.rstudio.com> para os sistemas operacionais Windows, MacOS, e Linux.
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'tinytex'
+), 'packages.bib')
+```
+
+
+
+
+
+
+
+
+
+

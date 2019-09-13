@@ -1,0 +1,28 @@
+---
+biblio-style: apalike
+bibliography: one.bib
+link-citations: yes
+---
+
+`r if (knitr::is_html_output()) '
+# References {-}
+'`
+- BUSSAB, Wilton O., MORETTIN, Pedro A. (1987), *Estatística Básica*, Atual Editora, 4 ed., São Paulo.
+
+- CRAWLEY, Michael J. (2007), *The R Book*, Chichester, West Sussex, United Kingdom, Wiley.
+
+- LANDEIRO, Victor L. (2011), *Introdução ao Uso do Programa R*, programa de Pós Graduação em Ecologia.  Apostila. Instituto Nacional de Pesquisas da Amazônia. 4 de março de 2011.
+
+- MONTGOMERY, D.C, et al. (2003), *Introduction to Linear Regression*. 3 Ed. John Wiley.
+
+- MORETTIN, Luiz G. (2000), *Estatística Básica*, Pearson Education do Brasil, 2 Vol., São Paulo.
+
+- TRIOLA, Mario F. (2005), *Introdução à Estatística*, LTC, 9 ed., Rio de janeiro.
+
+- R Core Team (2018). *R: A Language and Environment for Statistical Computing*. R Foundation for Statistical Computing, Vienna, Austria. 
+
+- RUMSEY, D. (2010), *Estatística para Leigos*, Alta Books, Rio de Janeiro.
+
+- SHEATHER, S. J. (2009). *A modern approach to regression with R*. New York, Springer.
+
+

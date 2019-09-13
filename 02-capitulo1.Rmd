@@ -1,0 +1,58 @@
+# Introdução {#intro}
+
+<div style="text-align: justify">
+
+Para se aplicar amostragem no R os seguintes pacotes (bibliotecas) serão utilizados:
+  - survey
+  - TeachingSampling
+  - samplingVarEst
+  - pps
+  - samplingbok.
+
+</div>
+
+## Instalação
+
+<div style="text-align: justify">
+
+</div>
+<!--
+```{r passo1, out.width='80%', fig.align='center', fig.cap='Primeiro passo para instalar o RStudio.', echo = FALSE}
+knitr::include_graphics('downloadRStudioPasso1.png')
+```
+
+
+
+Para abrir um pacote e utilizar as funções dele, basta ir no console do RStudio  e digitar o comando `library` ou `require` com o nome do pacote entre parênteses e clicar enter:
+```{r , eval=FALSE}
+library(CARS) 
+require(CARS)
+```
+
+```{r pacotes3, out.width='70%', fig.align='center', fig.cap='Utilizando um pacote.', echo = FALSE}
+knitr::include_graphics('UtilizandoPacotes1.png')
+```
+
+</div>
+
+
+```{r , results = 'hide'}
+x <- 10 # x receberá o valor 10
+15 -> y # y receberá o valor 15
+X <- 6 # X receberá o valor 6
+Y = 15 # Y receberá o valor 15
+```
+
+Seus dados irão aparecer na parte superior, no canto esquerdo do ambiente do RStudio (ver Figua \@ref(fig:importDataset3).
+
+
+$$
+\huge
+\begin{array}{cl}
+> \quad\mbox{Maior que} & >= \quad \mbox{maior que ou igual a} \\
+< \quad\mbox{Menor que} & <= \quad\mbox{menor que ou igual a} \\
+== \quad\mbox{igualdade}& != \quad\mbox{diferença} \\
+\end{array}
+$$
+-->
+

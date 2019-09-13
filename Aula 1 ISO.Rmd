@@ -1,0 +1,383 @@
+---
+title: "Análise de Dados Amostrais com Aplicações em R"
+subtitle: "Introdução"
+author: |
+  | **Profº Hemílio Fernandes Campos Coêlho;**
+  | **Monitor Giovani Nucci (colaboração e desenvolvimento)**
+institute: 
+   - Universidade Federal da Paraíba
+   - Departamento de Estatística
+   - hemilio@de.ufpb.br, giovaninucci@gmail.com
+date: 
+fontsize: 9pt
+output: 
+ beamer_presentation:
+   theme: "progressbar"
+   colortheme: "progressbar"
+   fonttheme: "progressbar"
+ 
+ in_header: ~/Dropbox/UFPB/Extensao/Aulas/AulaPrimeirosPassos/beamer-header-simple.txt
+ after_body: ~/Dropbox/UFPB/Extensao/Aulas/AulaPrimeirosPassos/progressbarSemlogo.txt
+ header-includes:
+  - \usepackage{ragged2e}
+  - \usepackage{etoolbox}
+  - \usepackage{lipsum}
+  - \usepackage{everysel}
+  - \usepackage{caption}  
+  - \usepackage{placeins}
+  - \usepackage{booktabs}
+  - \usepackage{longtable}
+  - \usepackage{array}
+  - \usepackage{multirow}
+  - \usepackage{wrapfig}
+  - \usepackage{float}
+  - \usepackage{colortbl}
+  - \usepackage{pdflscape}
+  - \usepackage{tabu}
+  - \usepackage{threeparttable}
+ 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+options(tinytex.verbose = TRUE)
+library(tinytex)
+```
+ 
+## Introdução 
+
+* R é um software estatístico que pode ser obtido gratuitamente através do seguinte
+endereço eletrônico: [R](www.r-project.org);
+
+* R pode ser também definido como sendo um conjunto integrado de utilidades para
+análise estatística e fornece uma larga variedade de técnicas estatísticas;
+
+* Esta linguagem é caracterizada pelo compromisso entre a flexibilidade existente
+por linguagens compiladas (como C, C++ e FORTRAN) e a conveniência dos tradicionais
+softwares estatísticos (Lemonte, 2006).
+
+* Neste curso os seguintes pacotes (bibliotecas) serão utilizados:
+  - survey
+  - TeachingSampling
+  - samplingVarEst
+  - pps
+  - samplingbok.
+
+## Área de amostragem
+
+* Definição clássica: Amostragem é a área da estatística que estuda técnicas e procedimentos
+para retirar e analisar uma amostra com o objetivo de fazer inferência
+a respeito da população de onde essa amostra foi retirada.
+
+* "Amostragem consiste em selecionar parte de uma população para observar, de modo que seja possível estimar alguma característica sobre toda a população".
+_(Steven K. Thompson)_
+
+* O que precisa ser dito claramente sobre a amostragem: É uma área ESSENCIAL
+para uma eficiente e correta análise estatística e jamais deve ser descartada em
+uma pesquisa que permite seu uso.
+
+## Exemplo de pesquisa em que não utilizar amostragem não deu certo
+
+* **Título do projeto:** AVALIAÇÃO COMPARATIVA DO ESTADO NUTRICIONAL DE CRIANÇAS
+
+* O projeto contemplava a realização de um estudo observacional, composto por dois grupos
+de crianças de determinada faixa etária, beneficiárias e não-beneficiárias de leite de vaca de
+um determinado programa governamental.
+
+* **Objetivo do programa:** Comparar o estado nutricional dos dois grupos.
+
+* O projeto não foi aprovado em um primeiro momento porque não foi especificado como seria o processo de amostragem, não foi mencionado o tipo da amostragem (amostragem aleatória simples, amostragem aleatória estratificada, amostragem por conglomerados, etc.), não foi mencionado as etapas para a escolha da amostra (um estágio, dois estágios, etc.) e um dos elementos importantes (não principais), que é o tamanho da amostra. 
+
+## Outro exemplo 
+
+- Pesquisas de Opinião frequentemente geram grandes controvérsias.
+
+- Shere Hite, em seu livro intitulado "_Mulheres e amor: Uma revolução cultural
+em progresso_" (1987), apresentou os seguintes resultados de uma pesquisa realizada:
+  * 84% das mulheres não são satisfeitas com seus relacionamentos;
+  * 70% das mulheres com 5 ou mais anos de casamento tiveram relações sexuais fora do
+casamento;
+  * 95% das mulheres relataram formas de assédio emocional e psicológico por parte dos
+homens com quem têm relacionamento amoroso.
+
+## continuação
+
+Algumas informações sobre a pesquisa que gerou os dados:
+
+- A amostra foi "auto-selecionada", uma vez que foi composta por 4,5% de mulheres
+que responderam aos 100.000 questionários enviados pela autora;
+
+- Os questionários foram enviados para organizações como grupo de mulheres profissionais,
+clínicas de atendimento psicológico especializada em mulheres, grupos
+femininos de igreja e "clubes femininos da terceira idade" ;
+
+- O questionário tinha cerca de 127 questões, muitas delas com diversas partes.
+
+## continuação
+
+- Muitas das questões eram vagas, empregando termos imprecisos como "paixão";
+
+- Muitas questões eram tendenciosas, como por exemplo: "O seu marido/amante vê
+você de igual para igual?"; ou ainda - "Em algum momento ele lhe trata como
+alguém inferior? Deixa você fora de decisões? Age como se fosse superior?".
+
+O grande problema com o estudo é que a autora acreditou que aquilo que ela observou
+em sua amostra era exatamente o que se passava com a população. Ou seja, ela
+generalizou todos os resultados para todas as mulheres.
+
+Dessa forma, temos uma primeira observação sobre o "tratamento" de amostras:
+
+## Por que utilizar amostragem?
+
+### **DADOS OS EXEMPLOS, A MENSAGEM QUE FICA É A SEGUINTE:**
+Não é possível realizar inferência estatística válida cientificamente usando amostras que não sejam probabilísticas.
+
+##
+### **O QUE É AMOSTRAGEM?**
+Amostragem é a área da estatística que estuda técnicas e procedimentos
+para retirar e analisar uma amostra com o objetivo de fazer inferência a
+respeito da população de onde essa amostra foi retirada.
+
+### **QUAL A IMPORTÂNCIA DA ÁREA?**
+ - Amostragem enumerativa
+ - Amostragem analítica
+
+## Exemplos de áreas de aplicação em populações humanas:
+
+**Marketing:**
+
+ - Pesquisas de mercado;
+ - Pesquisa de satisfação em geral.
+ 
+**Sociologia:** Pesquisas de opinião;
+
+**Economia:** Levantamentos econômicos;
+
+**Psicologia:**
+
+ - Pesquisas de comportamento;
+ - Pesquisas de qualidade de vida.
+ 
+
+## Exemplos de áreas de aplicação em populações não humanas:
+
+
+**Agronomia:** Levantamento de produção agrícola.
+
+**Ecologia:**
+
+ - Levantamentos de impacto ambiental;
+ - Levantamento de recursos naturais.
+ 
+**Engenharia:**
+
+ - Implementação de planos para monitoramento da qualidade;
+ - "Acceptance Sampling".
+
+**Biologia:** Levantamento de abundância de espécies.
+
+## Importância social e econômica
+Em vários países existe pelo menos um órgão do governo encarregado de
+produzir informações sociais" sobre a nação. Esses órgãos fazem uso
+intensivo de técnicas estatísticas de amostragem. Exemplos:
+
+**Brasil:**  [IBGE](www.ibge.gov.br)
+
+**Canadá:**  [Statistics Canada](www.statcan.ca)
+
+**EUA:** [Bureau of Labor Statistics](www.bls.gov.br), [US Census Bureau](www.census.gov) e outros...
+
+**Colômbia:** [DANE](www.dane.gov.co)
+
+**Chile:** [INE](www.ine.gov.cl)
+
+**Índia:** [MOSPI](www.mospi.nic.in)
+
+## Levantamentos amostrais 
+
+- Qualquer procedimento que faça uso de uma amostra para obter
+informação sobre uma população, de onde essa foi retirada poderia
+ser chamado de um levantamento amostral.
+
+- No entanto, nem todo procedimento usado para a composição de uma amostra é suficiente para justificar inferência estatística.
+
+- É preciso que o procedimento tenha como base um método probabilísticos de amostragem.
+ 
+- Vantagens de um levantamento amostral:
+  - Baixo custo;
+  - Rapidez;
+  - Qualidade da informação.
+
+## continuação
+
+Em algumas situações, utilizar uma amostra é a única alternativa:
+
+- Quando a obtenção da informação desejada implica na destruição da
+unidade pesquisada;
+
+- Quando o custo de realização de um censo é proibitivo.
+
+Talvez a justificativa menos natural dentre as descritas acima seja a de
+que os resultados obtidos via amostragem podem ser de melhor qualidade
+do que os obtidos via pesquisa censitária.
+
+## Conceitos básicos iniciais 
+
+1. **População-alvo:** É o conjunto de todos os elementos sobre os quais alguma informação é procurada.
+
+2. **Cadastro:** É o meio pelo qual os elementos de uma população-alvo são identificados.
+
+3. **Amostra:** É um subconjunto da população pesquisada, onde a informação desejada é observada.
+
+4. **Variável de interesse:** Uma característica de interesse, relativa acada elemento da população pesquisada, mas que é observada apenas na amostra.
+
+5. **Unidade amostral (U.A.):** É a unidade que é de fato selecionada para compor a amostra.
+
+## Cadastros 
+Dentre os conceitos básicos citados anteriormente, o de cadastro é fundamental para a implementação de um plano amostral probabilístico.
+
+- No contexto de amostragem, cadastro é a designação dada a qualquer material ou instrumento usado para identificar e obter acesso aos elementos que compõem a população-alvo.
+
+- Um processo físico de aleatorização (sorteio) é aplicado nas unidades que compõem o cadastro (unidades amostrais).
+
+- Este processo físico de aleatorização será chamado de plano amostral. Veremos vários destes ao longo do curso.
+
+- Uma unidade amostral pode ser um elemento ou um conjunto (conglomerado) de elementos da população. Neste sentido, é possível identificar dois tipos de cadastros.
+
+
+## Tipos de cadastros
+
+**_(a)_** Cadastros compostos por uma listagem de elementos da população-alvo;
+
+**_(b)_** Cadastros compostos por uma lista de conjuntos de elementos da população-alvo.
+
+A disponibilidade de um cadastro do tipo **_(a)_** permite a utilização de planos amostrais com seleção direta de elementos. É comum, porém, encontrar situações em que apenas um cadastro do tipo **_(b)_** está disponível.
+
+Nesse caso, para observar um elemento, é preciso fazer uso de planos amostrais em estágios. É possível ainda, selecionar uma unidade do cadastro e observar todos os elementos que a compõem.  
+
+## Exemplo
+
+Levantamento amostral do consumo abusivo de bebidas alcoólicas na cidade de João Pessoa
+
+- **População-alvo:**
+
+- **Cadastro:**
+
+- **Amostra:**
+
+- **Variáveis de interesse:**
+
+- **Elemento da população:**
+
+- **Unidade amostral:**
+
+## Etapas gerais de um levantamento amostral
+
+Um levantamento amostral pode ser dividido em várias etapas. Cochran
+(1977) as descreve de acordo com os seguintes tópicos gerais:
+
+1. Identificação dos objetivos do levantamento;
+
+2. Definição da população-alvo;
+
+3. Definição das variáveis de interesse e dos dados a serem colhidos;
+
+4. Identificação do grau de precisão desejado;
+
+5. Escolha do instrumento de coleta de dados;
+
+6. Escolha de um cadastro;
+
+## Etapas gerais de um levantamento amostral
+
+7. Planejamento da amostra;
+
+8. Pré-teste;
+
+9. Seleção da amostra e coleta de dados / Organização de trabalho de campo;
+
+10. Descrição e análise dos dados;
+
+11. Resumo da informação adquirida e recomendações para futuros levantamentos.
+
+## Tipos de erros em levantamentos amostrais
+
+- **Erro amostral:** É o erro associado ao fato de que a variável de interesse é observada apenas na amostra.
+```{r imagem1, out.width='80%',fig.align='center',  echo = FALSE}
+knitr::include_graphics('imagem1.png')
+```
+
+## Tipos de erros em levantamentos amostrais
+- **Erro não-amostral:** É o erro associado ao processo operacional envolvido em um levantamento amostral.
+```{r imagem2, out.width='80%',fig.align='center',  echo = FALSE}
+knitr::include_graphics('imagem2.png')
+```
+
+## Tipos de erros em levantamentos amostrais
+
+Biemer e Lyberg (2003) subdividem os erros não-amostrais nas seguintes categorias:
+
+*_(a)_* Erros de especificação;
+
+*_(b)_* Erros de cobertura do cadastro;
+
+*_(c)_* Erros de processamento;
+
+*_(d)_* Erros de mensuração;
+
+*_(e)_* Erros de não-observação (não-resposta).
+
+
+## Etapas operacionais de um levantamento amostral e tipos de erro associados
+
+Do ponto de vista operacional, Särndal, Swensson e Wretman (1992) identificam as seguintes etapas de um levantamento amostral, e para cada uma,associam o respectivo erro de cada etapa:
+```{r tabela1, out.width='80%',fig.align='center',  echo = FALSE}
+knitr::include_graphics('tabela1.png')
+```
+
+## Principais tipos de pesquisas
+
+- **CENSOS:** Coletam informações sobre TODAS as unidades da população.
+
+- **PESQUISAS POR AMOSTRAGEM:** Coletam informações sobre uma parte(amostra) da população.
+
+## Pesquisas por amostragens 
+```{r imagem3, out.width='80%',fig.align='center',  echo = FALSE}
+knitr::include_graphics('imagem3.png')
+```
+
+## Exemplos de pesquisas do tipo CENSO
+
+- Censo Demográfico (2010)
+
+- Contagem populacional (1996)
+
+- Censo Agropecuário (2010)
+
+- Censos Econômicos (1985)
+
+**Sobre Amostragem:**
+
+_"Amostragem consiste em selecionar parte de uma população para observar, de modo que seja possível estimar alguma característica sobre toda a população"._ (Steven K. Thompson)
+
+## Definições
+
+- **Plano amostral:** É a estratégia de associação de probabilidades nas amostras possíveis de serem retiradas.
+
+- **Esquema amostral:** É o conjunto de procedimentos físicos e computacionais realizados para compor a amostra de acordo com o plano amostral.
+
+```{r imagem4, out.width='60%',fig.align='center',  echo = FALSE}
+knitr::include_graphics('imagem4.png')
+```
+
+## Alguns exemplos de planos amostrais
+
+Os termos __amostra aleatória simples__, __amostra estratificada__ e __amostra de conglomerados__ são muito utilizados na discussão de pesquisas por amostragem, então estes serão brevemente definidos agora.
+
+- **Amostra aleatória simples:** É a forma mais simples de amostra probabilística. Os elementos da população possuem mesma chance de serem sorteados.
+
+- **Amostra aleatória estratificada:** A população é dividida em **grupos**, de acordo com as informações fornecidas por uma variável qualitativa. Esta variável qualitativa será chamada de **estrato**. Um plano amostral é aplicado dentro de cada grupo, o que garante um certo "equilíbrio" das informações coletadas graças ao estrato.
+
+## continuação
+
+- **Amostra de conglomerados:** Os elementos da população são agregados em grandes elementos amostrais, chamados __conglomerados__. Suponha que você queira fazer uma pesquisa com professores do ensino fundamental em João Pessoa, mas você não tem um cadastro de professores. Entretanto, você tem disponível um cadastro de escolas disponível. Dessa forma, sorteia-se primeiro as escolas, e dentro de cada uma, sorteia-se (ou não) amostras de professores. Veremos este procedimento com maior detalhamento no futuro.
